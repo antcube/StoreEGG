@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tienda Virtual</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header__contenido">
+            <div class="search">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="img/tiendamia-logo.svg" alt="Logo store">
+                    </a>
+                </div>
+                <div class="form">
+                    <form>
+                        <input class="form__input" type="text" placeholder="Search">
+                    </form>
+                </div>
+                <nav class="social">
+                    <a href="#" class="social__icon">
+                        <img src="img/facebook.png" alt="icono facebook">
+                    </a>
+                    <a href="#" class="social__icon">
+                        <img src="img/instagram.png" alt="icono instagram">
+                    </a>
+                    <a href="#" class="social__icon">
+                        <img src="img/truck.png" alt="icono carrito">
+                    </a>
+                </nav>
+            </div>
+
+            <div class="nav">
+                <ul>
+                  <li class="nav__link">
+                    <a href="#">Ofertas</a></li>
+                  <li class="nav__link">
+                    <a href="#">Cómo comprar</a></li>
+                  <li class="nav__link">
+                    <a href="#">Costos y tarifas</a></li>
+                  <li class="nav__link">
+                    <a href="#">Mis pedidos</a></li>
+                  <li class="nav__link">
+                    <a href="#">Garantía</a></li>
+                </ul>
+            </div>
+        </div>
+    </header>
+    
+    <main>
+        <div class="container main__contenido">
+            <div class="producto__images-block">
+                <div class="producto__thumbnail">
+                    <img src="img/mock1.jpg" alt="Macbook imagen 1">
+                    <img src="img/mock2.jpg" alt="Macbook imagen 2">
+                </div>
+                <div class="producto__main-image">
+                    <img src="img/mock1.jpg" alt="Macbook imagen">
+                </div>
+            </div>
+            <div class="producto__description-block">
+                <h3 class="producto__heading">Macbook M2 Pro</h3>
+                <form class="selector">
+                    <label class="selector__label" for="color">Color:</label>
+                    <select class="selector__select" id="color">
+                        <option selected disabled>-- Seleccionar --</option>
+                        <option value="silver">Silver</option>
+                        <option value="gold">Gold</option>
+                        <option value="silverDark">Silver Dark</option>
+                    </select>
+                </form>
+                <div class="producto__description">
+                    <h5 class="producto__description-title">Descripción:</h5>
+                    <p class="producto__description-text">
+                        La MacBook M2 Pro combina rendimiento excepcional y diseño elegante. Impulsada por el chip M2 de Apple y hasta 16 GB de RAM, ofrece potencia para cualquier tarea. Con pantalla Retina y cuerpo de aluminio unibody, es resistente y estilizada. Características como Touch Bar y Touch ID garantizan una experiencia intuitiva y segura. Con conectividad avanzada y experiencia fluida, redefine la excelencia para profesionales y usuarios exigentes. 
+                    </p>
+                </div>
+            </div>
+            <div class="producto__checkout-block">
+                <p class="producto__total">Total</p>
+                <p class="producto__price">$2,500.00</p>
+                <p class="producto__taxation">Incluye impuestos PAIS y percepción AFIP. Podés recuperar $500 haciendo la solicitud en AFIP.</p>
+                <div class="producto__info">
+                    <img src="img/truck.png" alt="icon truck">
+                    <p>Agrega el producto al carrito para conocer los costos de envío</p>
+                </div>
+                <div class="producto__info">
+                    <img src="img/plane.png" alt="icon plane">
+                    <p>Recibí aproximadamente entre 10 y 15 días hábiles, seleccionando envío normal</p>
+                </div>
+                <form class="producto__form-group">
+                    <div class="form__top">
+                        <input type="number" min="1" value="1" />
+                        <button class="btn-primary">Comprar</button>
+                    </div>
+                    <div class="form__bottom">
+                        <button class="btn-outline">Añadir al Carrito</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <section class="ofertas container">
+        <h3 class="ofertas__title">Ofertas de la semana</h3>
+        <div class="product-container product-container--ofertas">
+            <a class="product-card" href="details.html">
+                <img class="product-img" src="img/mock3.jpg" alt="Macbook Pro" />
+                <div class="product-info">
+                    <span class="product-title">MacBook Pro 15'4</span>
+                    <span class="product-description">Space Gray</span>
+                    <div class="product-price-block">
+                        <span class="price">$750.000</span>
+                        <span class="discount">50% Off</span>
+                    </div>
+                    <div class="product-tax-policy">Incluye impuesto País y percepción AFIP</div>
+                </div>
+            </a>
+            <a class="product-card" href="details.html">
+                <img class="product-img" src="img/mock3.jpg" alt="Macbook Pro" />
+                <div class="product-info">
+                    <span class="product-title">MacBook Pro 15'4</span>
+                    <span class="product-description">Space Gray</span>
+                    <div class="product-price-block">
+                        <span class="price">$750.000</span>
+                        <span class="discount">50% Off</span>
+                    </div>
+                    <div class="product-tax-policy">Incluye impuesto País y percepción AFIP</div>
+                </div>
+            </a>
+            <a class="product-card" href="details.html">
+                <img class="product-img" src="img/mock3.jpg" alt="Macbook Pro" />
+                <div class="product-info">
+                    <span class="product-title">MacBook Pro 15'4</span>
+                    <span class="product-description">Space Gray</span>
+                    <div class="product-price-block">
+                        <span class="price">$750.000</span>
+                        <span class="discount">50% Off</span>
+                    </div>
+                    <div class="product-tax-policy">Incluye impuesto País y percepción AFIP</div>
+                </div>
+            </a>
+            <a class="product-card" href="details.html">
+                <img class="product-img" src="img/mock3.jpg" alt="Macbook Pro" />
+                <div class="product-info">
+                    <span class="product-title">MacBook Pro 15'4</span>
+                    <span class="product-description">Space Gray</span>
+                    <div class="product-price-block">
+                        <span class="price">$750.000</span>
+                        <span class="discount">50% Off</span>
+                    </div>
+                    <div class="product-tax-policy">Incluye impuesto País y percepción AFIP</div>
+                </div>
+            </a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container footer__contenido">
+            <div class="columns-container">
+                <div class="col">
+                    <a href="#">Ofertas</a>
+                    <a href="#">Laptops</a>
+                    <a href="#">Audio</a>
+                    <a href="#">Auriculares</a>
+                </div>
+                <div class="col">
+                    <a href="#">Cómo comprar</a>
+                    <a href="#">Formas de pago</a>
+                    <a href="#">Envios</a>
+                    <a href="#">Devoluciones</a>
+                </div>
+                <div class="col">
+                    <a href="#">Costos y tarifas</a>
+                    <a href="#">Impuestos</a>
+                    <a href="#">Facturación</a>
+                </div>
+                <div class="col">
+                    <a href="#">Mis pedidos</a>
+                    <a href="#">Pedir nuevamente</a>
+                    <a href="#">Lista de deseos</a>
+                </div>
+                <div class="col">
+                    <a href="#">Garantía</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>Curso de HTML + CSS 2024</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
