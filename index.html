@@ -21,7 +21,7 @@
                 </div>
                 <div class="form">
                     <form>
-                        <input class="form__input" type="text" placeholder="Search">
+                        <input id="search" class="form__input" type="text" placeholder="Search">
                     </form>
                 </div>
                 <nav class="social">
@@ -38,17 +38,22 @@
             </div>
 
             <div class="nav">
-                <ul>
-                  <li class="nav__link">
-                    <a href="#">Ofertas</a></li>
-                  <li class="nav__link">
-                    <a href="#">Cómo comprar</a></li>
-                  <li class="nav__link">
-                    <a href="#">Costos y tarifas</a></li>
-                  <li class="nav__link">
-                    <a href="#">Mis pedidos</a></li>
-                  <li class="nav__link">
-                    <a href="#">Garantía</a></li>
+                <ul id="nav">
+                    <li class="nav__link">
+                        <a href="#">Ofertas</a>
+                    </li>
+                    <li class="nav__link">
+                        <a href="#">Cómo comprar</a>
+                    </li>
+                    <li class="nav__link">
+                        <a href="#">Costos y tarifas</a>
+                    </li>
+                    <li class="nav__link">
+                        <a href="#">Mis pedidos</a>
+                    </li>
+                    <li class="nav__link">
+                        <a href="#">Garantía</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -65,7 +70,7 @@
     
     <main>
         <div class="container">
-            <div class="product-container">
+            <div id="products" class="product-container">
                 <a class="product-card" href="details.html">
                     <img class="product-img" src="img/mock1.jpg" alt="Macbook Pro" />
                     <div class="product-info">
@@ -168,7 +173,7 @@
     
     <footer>
         <div class="container footer__contenido">
-            <div class="columns-container">
+            <div id="footer" class="columns-container">
                 <div class="col">
                     <a href="#">Ofertas</a>
                     <a href="#">Laptops</a>
@@ -200,5 +205,8 @@
             </div>
         </div>
     </footer>
+
+    <!-- <script src="./scripts/products.js"></script> -->
+    <script src="./scripts/filterProducts.js"></script>
 </body>
 </html>
