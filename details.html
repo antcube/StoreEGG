@@ -19,11 +19,11 @@
                         <img src="img/tiendamia-logo.svg" alt="Logo store">
                     </a>
                 </div>
-                <div class="form">
+                <!-- <div class="form">
                     <form>
                         <input class="form__input" type="text" placeholder="Search">
                     </form>
-                </div>
+                </div> -->
                 <nav class="social">
                     <a href="#" class="social__icon">
                         <img src="img/facebook.png" alt="icono facebook">
@@ -57,15 +57,15 @@
     <main>
         <div class="container main__contenido">
             <div class="producto__images-block">
-                <div class="producto__thumbnail">
+                <div id="imagesSmall" class="producto__thumbnail">
                     <img src="img/mock1.jpg" alt="Macbook imagen 1">
                     <img src="img/mock2.jpg" alt="Macbook imagen 2">
                 </div>
-                <div class="producto__main-image">
+                <div id="imageMain" class="producto__main-image">
                     <img src="img/mock1.jpg" alt="Macbook imagen">
                 </div>
             </div>
-            <div class="producto__description-block">
+            <div id="descripcion-bloque" class="producto__description-block">
                 <h3 class="producto__heading">Macbook M2 Pro</h3>
                 <form class="selector">
                     <label class="selector__label" for="color">Color:</label>
@@ -196,5 +196,9 @@
             </div>
         </div>
     </footer>
+
+
+    <script src="./scripts/filterProducts.js"></script>
+    <script src="./scripts/productDetail.js"></script>
 </body>
 </html>
