@@ -43,13 +43,11 @@ const product6 = new Product("Producto6", "Descripción del producto 6", 1300.00
 const product7 = new Product("Producto7", "Descripción del producto 7", 1300.00, 50, "./img/mock2.jpg", "./details.html");
 const product8 = new Product("Producto8", "Descripción del producto 8", 1300.00, 50, "./img/mock2.jpg", "./details.html");
 
-
+// Creo un array de los productos
 const products = [product1, product2, product3, product4, product5, product6, product7, product8];
 
 // Contenedor
 const productContainer = document.querySelector("#products");
-
-productContainer.textContent = "";
 
 document.addEventListener('DOMContentLoaded', () => {
     mostrarProductos(products);
@@ -108,8 +106,15 @@ function captureText (event) {
         return producto.name === busqueda;
     });
 
+    limpiarHTML();
+
     mostrarProductos(productoFiltrado);
-    console.log('sss');
+}
+
+function limpiarHTML() {
+    while(productContainer.firstChild){
+        productContainer.removeChild(productContainer.firstChild);
+    }
 }
 
 // Metodo Filter
