@@ -1,16 +1,17 @@
 import { products } from './data.js';
 
 const query = location.search;
-console.log(query);
 const params = new URLSearchParams(query);
-console.log(params);
 const id = params.get('id');
-console.log(id);
 
 document.addEventListener('DOMContentLoaded', () => {
     const resultado = products.find( product => product.id === id);
 
     mostrarProducto(resultado);
+
+    cambioImagen();
+
+    actualizarPrecio(resultado);
 });
 
 function mostrarProducto(producto) {
@@ -162,4 +163,26 @@ function mostrarProducto(producto) {
     container.append(imagesBlock, descriptionBlock, checkoutBlock);
 
     
+}
+
+function cambioImagen() {
+    const miniaturas = document.querySelectorAll('.producto__thumbnail img');
+
+    const imagenPrincipal = document.querySelector('.producto__main-image img');
+
+    miniaturas.forEach( function(miniatura) {
+        miniatura.addEventListener('click', function() {
+            imagenPrincipal.src = miniatura.src;
+        })
+    })
+}
+
+function actualizarPrecio(producto) {
+    const cantidadInput = document.querySelector('.form__top input');
+    const precio = document.querySelector('.producto__price');
+
+    cantidadInput.addEventListener('change', e => {
+        const cantidad = parseInt(e.target.value);
+        precio.textContent = `$ ${producto.price * cantidad}.00`;
+    });
 }

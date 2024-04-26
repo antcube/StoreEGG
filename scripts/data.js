@@ -1,7 +1,7 @@
 import Product from "./Product.js";
 
 // Instancias de Product
-const product1 = new Product("P7Q8R11", "Producto1", "Descripción del producto 1", 1000.00, 50, ["./img/mock1.jpg", "./img/mock1.jpg", "./img/mock1.jpg"], "./details.html");
+const product1 = new Product("P7Q8R11", "Producto1", "Descripción del producto 1", 1000.00, 50, ["./img/mock1.jpg", "./img/mock2.jpg", "./img/mock1.jpg"], "./details.html");
 const product2 = new Product("P7Q8R12", "Producto2", "Descripción del producto 2", 1000.00, 50, ["./img/mock1.jpg", "./img/mock1.jpg", "./img/mock1.jpg"], "./details.html");
 const product3 = new Product("P7Q8R13", "Producto3", "Descripción del producto 3", 1000.00, 50, ["./img/mock1.jpg", "./img/mock1.jpg", "./img/mock1.jpg"], "./details.html");
 const product4 = new Product("P7Q8R14", "Producto4", "Descripción del producto 4", 1000.00, 50, ["./img/mock1.jpg", "./img/mock1.jpg", "./img/mock1.jpg"], "./details.html");

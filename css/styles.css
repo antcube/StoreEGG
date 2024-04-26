@@ -354,6 +354,7 @@ footer {
         margin-bottom: .5rem;
         border-radius: 1rem;
         overflow: hidden;
+        cursor: pointer;
     }
 }
 .producto__main-image {
