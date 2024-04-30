@@ -31,20 +31,23 @@ function mostrarProducto(producto) {
     mainImage.className = 'producto__main-image';
 
     producto.img.forEach((imgSrc, index) => {
-        const image = document.createElement('IMG');
-        image.src = imgSrc;
-        image.alt = producto.name;
-    
-        // Agrega las primeras dos imágenes al thumbnail y la tercera al mainImage
-        if (index === 0) {
-            mainImage.append(image);
-        } else {
-            thumbnail.append(image);
-        }
+        const thumbnailImage = document.createElement('IMG');
+        thumbnailImage.src = imgSrc;
+        thumbnailImage.alt = producto.name;
 
-        image.addEventListener('click', () => {
-            mainImage.querySelector('img').src = image.src;
+        thumbnail.append(thumbnailImage);
+    
+        thumbnailImage.addEventListener('click', () => {
+            mainImage.querySelector('img').src = thumbnailImage.src;
         });
+    
+        if (index === 0) {
+            const mainImageElement = document.createElement('IMG');
+            mainImageElement.src = imgSrc;
+            mainImageElement.alt = producto.name;
+
+            mainImage.append(mainImageElement);
+        }
     });
 
     imagesBlock.append(thumbnail, mainImage);
@@ -69,22 +72,20 @@ function mostrarProducto(producto) {
     select.className = 'selector__select';
     select.id = 'color';
 
-    const defaultOption = document.createElement('OPTION');
-    defaultOption.textContent = '-- Seleccionar --';
-    defaultOption.selected = true;
-    defaultOption.disabled = true;
+    // const defaultOption = document.createElement('OPTION');
+    // defaultOption.textContent = '-- Seleccionar --';
+    // defaultOption.selected = true;
+    // defaultOption.disabled = true;
 
-    const option1 = document.createElement('OPTION');
-    option1.value = 'silver';
-    option1.textContent = 'Silver';
+    // select.append(defaultOption);
 
-    const option2 = document.createElement('OPTION');
-    option2.value = 'gold';
-    option2.textContent = 'Gold';
-
-    const option3 = document.createElement('OPTION');
-    option3.value = 'silverDark';
-    option3.textContent = 'Silver Dark';
+    producto.colors.forEach(color => {
+        const option = document.createElement('OPTION');
+        option.value = color;
+        option.textContent = color;
+        console.log(option);
+        select.append(option);
+    });
 
     const description = document.createElement('DIV');
     description.className = 'producto__description';
@@ -97,7 +98,6 @@ function mostrarProducto(producto) {
     descriptionText.className = 'producto__description-text';
     descriptionText.textContent = producto.description;
 
-    select.append(defaultOption, option1, option2, option3);
     form.append(label, select);
     description.append(descriptionTitle, descriptionText);
     descriptionBlock.append(heading, form, description);

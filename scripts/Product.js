@@ -1,5 +1,5 @@
 class Product {
-    constructor(id, name, description, price, discount, img, linkTo) {
+    constructor(id, name, description, price, discount, img, colors, linkTo) {
         // atributos
         this.id = id;
         this.name = name;
@@ -7,6 +7,7 @@ class Product {
         this.price = price;
         this.discount = discount;
         this.img = img;
+        this.colors = colors;
         this.linkTo = linkTo;
     }
 }

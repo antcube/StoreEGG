@@ -20,7 +20,8 @@ inputBuscar.addEventListener('keyup', e => {
     const textoBusqueda = e.target.value.toLowerCase().trim();
     
     const productoFiltrado = products.filter( producto => {
-        return producto.name.toLowerCase() === textoBusqueda;
+        // return producto.name.toLowerCase() === textoBusqueda;
+        return producto.name.toLowerCase().startsWith(textoBusqueda);
     });
 
     limpiarHTML();
@@ -36,10 +37,13 @@ inputBuscar.addEventListener('keyup', e => {
 // Funciones
 function mostrarProductos(productoArray) {
     productoArray.forEach( product => {
-        const card = document.createElement("A");
+        const card = document.createElement("DIV");
         card.classList.add("product-card");
-        card.href = `${product.linkTo}?id=${product.id}`;
     
+        const link = document.createElement("A");
+        link.href = `${product.linkTo}?id=${product.id}`;
+        link.classList.add("product-link");
+
         const img = document.createElement("IMG");
         img.classList.add("product-img");
         img.src = product.img[0];
@@ -61,7 +65,7 @@ function mostrarProductos(productoArray) {
     
         const price = document.createElement("SPAN");
         price.classList.add("price");
-        price.textContent = `$${product.price}.00`;
+        price.textContent = `$ ${product.price}.00`;
     
         const discount = document.createElement("SPAN");
         discount.classList.add("discount");
@@ -73,7 +77,8 @@ function mostrarProductos(productoArray) {
     
         priceContainer.append(price, discount);
         cardBody.append(title, description, priceContainer, policyContainer);
-        card.append(img, cardBody);
+        link.append(img);
+        card.append(link, cardBody);
         productContainer.append(card);
     });
 }
