@@ -471,6 +471,7 @@ footer {
     border: none;
     height: 40px;
     border-radius: 10px;
+    cursor: pointer;
 }
 .btn-outline {
     width: 100%;
@@ -479,6 +480,7 @@ footer {
     font-weight: bold;
     height: 40px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 /* Ofertas */

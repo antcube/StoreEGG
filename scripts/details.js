@@ -9,9 +9,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     mostrarProducto(resultado);
 
-    cambioImagen();
-
-    actualizarPrecio(resultado);
+    const formulario = document.querySelectorAll('form');
+    formulario.forEach( form => {
+        form.addEventListener('submit', e => {
+            e.preventDefault();
+        });
+    });
+    
 });
 
 function mostrarProducto(producto) {
@@ -37,6 +41,10 @@ function mostrarProducto(producto) {
         } else {
             thumbnail.append(image);
         }
+
+        image.addEventListener('click', () => {
+            mainImage.querySelector('img').src = image.src;
+        });
     });
 
     imagesBlock.append(thumbnail, mainImage);
@@ -94,7 +102,6 @@ function mostrarProducto(producto) {
     description.append(descriptionTitle, descriptionText);
     descriptionBlock.append(heading, form, description);
 
-
     const checkoutBlock = document.createElement('DIV');
     checkoutBlock.className = 'producto__checkout-block';
 
@@ -144,6 +151,10 @@ function mostrarProducto(producto) {
     inputNumber.min = 1;
     inputNumber.value = 1;
 
+    inputNumber.addEventListener('change', (e) => {
+        actualizarPrecio(producto, parseInt(e.target.value));
+    });
+
     const button = document.createElement('BUTTON');
     button.classList.add('btn-primary');
     button.textContent = 'Comprar';
@@ -152,7 +163,9 @@ function mostrarProducto(producto) {
     buttonAdd.classList.add('btn-outline');
     buttonAdd.textContent = 'Agregar al carrito';
 
-   
+    buttonAdd.addEventListener('click', () => {
+        saveProduct(producto);
+    });
 
     info1.append(icono1, textoEnvio);
     info2.append(icono2, textoDias);
@@ -161,28 +174,34 @@ function mostrarProducto(producto) {
     formCarrito.append(formTop, formBottom);
     checkoutBlock.append(total, price, taxation, info1, info2, formCarrito);
     container.append(imagesBlock, descriptionBlock, checkoutBlock);
-
-    
 }
 
-function cambioImagen() {
-    const miniaturas = document.querySelectorAll('.producto__thumbnail img');
-
-    const imagenPrincipal = document.querySelector('.producto__main-image img');
-
-    miniaturas.forEach( function(miniatura) {
-        miniatura.addEventListener('click', function() {
-            imagenPrincipal.src = miniatura.src;
-        })
-    })
-}
-
-function actualizarPrecio(producto) {
-    const cantidadInput = document.querySelector('.form__top input');
+function actualizarPrecio(producto, cantidad) {
     const precio = document.querySelector('.producto__price');
 
-    cantidadInput.addEventListener('change', e => {
-        const cantidad = parseInt(e.target.value);
-        precio.textContent = `$ ${producto.price * cantidad}.00`;
-    });
+    precio.textContent = `$ ${producto.price * cantidad}.00`;
+    producto.quantity = cantidad;
+}
+
+function saveProduct(producto) {
+    const color = document.querySelector('#color').value;
+
+    // Destructuring del objeto producto
+    const { id, name, price, img, quantity } = producto;
+
+    const subTotal = price * quantity
+
+    const productoAgregado = {
+        id, // id: id
+        name, // name: name
+        subTotal, // price: price
+        img, // img: img
+        quantity, // quantity: quantity
+        color // color: color
+    }
+
+    // Local Storage
+    const carrito = JSON.parse(localStorage.getItem('carritoEGG')) ?? [];
+    // Spread Operator
+    localStorage.setItem('carritoEGG', JSON.stringify([...carrito, productoAgregado]));
 }
