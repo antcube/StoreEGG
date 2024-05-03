@@ -4,18 +4,16 @@ const query = location.search;
 const params = new URLSearchParams(query);
 const id = params.get('id');
 
+
 document.addEventListener('DOMContentLoaded', () => {
     const resultado = products.find( product => product.id === id);
 
-    mostrarProducto(resultado);
-
-    const formulario = document.querySelectorAll('form');
-    formulario.forEach( form => {
-        form.addEventListener('submit', e => {
-            e.preventDefault();
-        });
-    });
-    
+    if (resultado) {
+        mostrarProducto(resultado);
+    } else {
+        console.error('Producto no encontrado');
+        window.location.href = 'index.html';
+    }
 });
 
 function mostrarProducto(producto) {
@@ -62,6 +60,7 @@ function mostrarProducto(producto) {
 
     const form = document.createElement('FORM');
     form.className = 'selector';
+    form.addEventListener('submit', (e) => { e.preventDefault() });
 
     const label = document.createElement('LABEL');
     label.className = 'selector__label';
@@ -83,7 +82,6 @@ function mostrarProducto(producto) {
         const option = document.createElement('OPTION');
         option.value = color;
         option.textContent = color;
-        console.log(option);
         select.append(option);
     });
 
@@ -139,6 +137,7 @@ function mostrarProducto(producto) {
 
     const formCarrito = document.createElement('FORM');
     formCarrito.classList.add('producto__form-group');
+    formCarrito.addEventListener('submit', (e) => { e.preventDefault() });
 
     const formTop = document.createElement('DIV');
     formTop.classList.add('form__top');
@@ -146,13 +145,40 @@ function mostrarProducto(producto) {
     const formBottom = document.createElement('DIV');
     formBottom.classList.add('form__bottom');
 
-    const inputNumber = document.createElement('INPUT');
-    inputNumber.type = 'number';
-    inputNumber.min = 1;
-    inputNumber.value = 1;
+    // const inputNumber = document.createElement('INPUT');
+    // inputNumber.type = 'number';
+    // inputNumber.min = 1;
+    // // inputNumber.max = producto.stock;
+    // inputNumber.max = 5;
+    // inputNumber.value = 1;
 
-    inputNumber.addEventListener('change', (e) => {
-        actualizarPrecio(producto, parseInt(e.target.value));
+    // inputNumber.addEventListener('change', (e) => {
+    //     actualizarPrecio(producto, parseInt(e.target.value));
+    // });
+
+    const selectNumber = document.createElement('SELECT');
+    
+    for (let i = 1; i <= 6; i++) {
+        const option = document.createElement('OPTION');
+        option.value = i;
+        option.text = i;
+        selectNumber.appendChild(option);
+    }
+
+    producto.quantity = 1;
+
+    selectNumber.addEventListener('change', (e) => {
+        let cantidad = parseInt(e.target.value);
+
+        if(isNaN(cantidad) || cantidad < 1 || !Number.isInteger(cantidad)) {
+            console.error('El valor seleccionado no es válido. Se establecerá la cantidad en 1.');
+            e.target.value = 1;
+            cantidad = 1;
+            actualizarPrecio(producto, cantidad);
+            return;
+        }
+
+        actualizarPrecio(producto, cantidad);
     });
 
     const button = document.createElement('BUTTON');
@@ -165,11 +191,13 @@ function mostrarProducto(producto) {
 
     buttonAdd.addEventListener('click', () => {
         saveProduct(producto);
+
+        window.location.href = 'cart.html';
     });
 
     info1.append(icono1, textoEnvio);
     info2.append(icono2, textoDias);
-    formTop.append(inputNumber, button);
+    formTop.append(selectNumber, button);
     formBottom.append(buttonAdd);
     formCarrito.append(formTop, formBottom);
     checkoutBlock.append(total, price, taxation, info1, info2, formCarrito);
@@ -178,8 +206,8 @@ function mostrarProducto(producto) {
 
 function actualizarPrecio(producto, cantidad) {
     const precio = document.querySelector('.producto__price');
-
     precio.textContent = `$ ${producto.price * cantidad}.00`;
+
     producto.quantity = cantidad;
 }
 
@@ -189,12 +217,12 @@ function saveProduct(producto) {
     // Destructuring del objeto producto
     const { id, name, price, img, quantity } = producto;
 
-    const subTotal = price * quantity
+    const subTotal = price * quantity;
 
     const productoAgregado = {
         id, // id: id
         name, // name: name
-        subTotal, // price: price
+        subTotal, // subtotal: subtotal
         img, // img: img
         quantity, // quantity: quantity
         color // color: color
@@ -202,6 +230,16 @@ function saveProduct(producto) {
 
     // Local Storage
     const carrito = JSON.parse(localStorage.getItem('carritoEGG')) ?? [];
-    // Spread Operator
-    localStorage.setItem('carritoEGG', JSON.stringify([...carrito, productoAgregado]));
+
+    const indexProductoExistente = carrito.findIndex(prod => prod.id === productoAgregado.id && prod.color === productoAgregado.color);
+
+    if(indexProductoExistente >= 0) {
+        carrito[indexProductoExistente].quantity += productoAgregado.quantity;
+        carrito[indexProductoExistente].subTotal = carrito[indexProductoExistente].quantity * price;
+    } else {
+        // carrito = [...carrito, productoAgregado]; // Cambiar a let carrito si se usa esta línea
+        carrito.push(productoAgregado);
+    }
+    
+    localStorage.setItem('carritoEGG', JSON.stringify(carrito));
 }
