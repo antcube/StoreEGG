@@ -215,13 +215,15 @@ function saveProduct(producto) {
     const color = document.querySelector('#color').value;
 
     // Destructuring del objeto producto
-    const { id, name, price, img, quantity } = producto;
+    const { id, name, description, price, img, quantity } = producto;
 
     const subTotal = price * quantity;
 
     const productoAgregado = {
         id, // id: id
         name, // name: name
+        description, // description: description
+        price, // price: price
         subTotal, // subtotal: subtotal
         img, // img: img
         quantity, // quantity: quantity

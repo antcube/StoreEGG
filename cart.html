@@ -19,11 +19,11 @@
                         <img src="img/tiendamia-logo.svg" alt="Logo store">
                     </a>
                 </div>
-                <div class="form">
+                <!-- <div class="form">
                     <form>
                         <input id="search" class="form__input" type="text" placeholder="Search">
                     </form>
-                </div>
+                </div> -->
                 <nav class="social">
                     <a href="#" class="social__icon">
                         <img src="img/facebook.png" alt="icono facebook">
@@ -31,7 +31,7 @@
                     <a href="#" class="social__icon">
                         <img src="img/instagram.png" alt="icono instagram">
                     </a>
-                    <a href="#" class="social__icon">
+                    <a href="cart.html" class="social__icon">
                         <img src="img/car.svg" alt="icono carrito">
                     </a>
                 </nav>
@@ -70,7 +70,7 @@
 
     <main class="cart container">
         <div class="cart__items">
-            <div class="cart__item">
+            <!-- <div class="cart__item">
                 <div class="cart__img-container">
                     <img src="img/mock1.jpg" alt="Imagen del producto">
                 </div>
@@ -80,11 +80,16 @@
                     <p class="cart__color">Color: <span>Gold</span></p>
                 </div>
                 <div class="cart__price-unitary">
+                    <p>Precio:</p>
                     <p class="cart__price">$ 1000</p>
                 </div>
                 <div class="cart__quantity">
                     <p>Cantidad: </p>
-                    <input type="number" value="1" min="1" max="6">
+                    <div class="cart__quantity-btns">
+                        <p>-</p>
+                        <input type="number" value="1" min="1" max="6">
+                        <p>+</p>
+                    </div>
                 </div>
                 <div class="cart__price-subtotal">
                     <div>
@@ -92,40 +97,14 @@
                         <p class="cart__price">$ 1000</p>
                     </div>
                     <div>
-                        <p>Subtotal</p>
+                        <p>Subtotal:</p>
                         <p class="cart__price--subtotal">$ 2000</p>
                     </div>
                 </div>
                 <div class="cart__trash">
-                    <img src="img/facebook.png" alt="Eliminar producto">
+                    <img src="img/trash.svg" alt="Eliminar producto">
                 </div>
-            </div>
-            <div class="cart__item">
-                <div class="cart__img-container">
-                    <img src="img/mock1.jpg" alt="Imagen del producto">
-                </div>
-                <div class="cart__description">
-                    <h4 class="cart__title">Producto1</h4>
-                    <p class="cart__text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit adipisci dolorem voluptatibus odit</p>
-                    <p class="cart__color">Color: <span>Gold</span></p>
-                </div>
-                <div class="cart__price-unitary">
-                    <p class="cart__price">$ 1000</p>
-                </div>
-                <div class="cart__quantity">
-                    <p>Cantidad: </p>
-                    <input type="number" value="1" min="1" max="6">
-                </div>
-                <div class="cart__price-subtotal">
-                    <p>Cantidad: </p>
-                    <input type="number" value="1" min="1" max="6">
-                    <p>Subtotal</p>
-                    <p class="cart__price--subtotal">$ 1000</p>
-                </div>
-                <div class="cart__trash">
-                    <img src="img/facebook.png" alt="Eliminar producto">
-                </div>
-            </div>
+            </div> -->
         </div>
         <div class="cart__total">
             <h3 class="cart__title-total">Resumen del pedido</h3>
@@ -133,8 +112,8 @@
                 <p>Total</p>
                 <p class="cart__price--total" >$ 10000</p>
             </div>
-            <p>Incluye impuesto PAIS y percepción AFIP</p>
-            <button class="cart__btn">Comprar</button>
+            <p class="cart__taxation">Incluye impuesto PAIS y percepción AFIP</p>
+            <button id="btn-comprar" class="cart__btn">Comprar</button>
         </div>
     </main>
     
@@ -173,6 +152,6 @@
         </div>
     </footer>
 
-    <script src="./scripts/ejemplo.js" type="module"></script>
+    <script src="./scripts/cart.js" type="module"></script>
 </body>
 </html>
