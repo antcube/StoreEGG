@@ -64,7 +64,7 @@ function showItemsinCart(carrito) {
 
         const pPriceValue = document.createElement('P');
         pPriceValue.classList.add('cart__price');
-        pPriceValue.textContent = `$ ${item.price}.00`;
+        pPriceValue.textContent = `$ ${item.price}`;
 
         const quantityDiv = document.createElement('DIV');
         quantityDiv.classList.add('cart__quantity');
@@ -83,7 +83,7 @@ function showItemsinCart(carrito) {
                 item.quantity--;
                 input.value = item.quantity;
                 item.subTotal = item.price * item.quantity;
-                pSubtotalValue.textContent = `$ ${item.subTotal}.0`;
+                pSubtotalValue.textContent = `$ ${item.subTotal}`;
                 updateTotalPrice(carrito);
             }
         })
@@ -103,7 +103,7 @@ function showItemsinCart(carrito) {
                 item.quantity++;
                 input.value = item.quantity;
                 item.subTotal = item.price * item.quantity;
-                pSubtotalValue.textContent = `$ ${item.subTotal}.0`;
+                pSubtotalValue.textContent = `$ ${item.subTotal}`;
                 updateTotalPrice(carrito);
             }
         })
@@ -121,7 +121,7 @@ function showItemsinCart(carrito) {
 
         const pPriceSubValue = document.createElement('P');
         pPriceSubValue.classList.add('cart__price');
-        pPriceSubValue.textContent = `$ ${item.price}.00`;
+        pPriceSubValue.textContent = `$ ${item.price}`;
 
         const divSubtotal = document.createElement('DIV');
 
@@ -130,7 +130,7 @@ function showItemsinCart(carrito) {
 
         const pSubtotalValue = document.createElement('P');
         pSubtotalValue.classList.add('cart__price--subtotal');
-        pSubtotalValue.textContent = `$ ${item.subTotal}.00`;
+        pSubtotalValue.textContent = `$ ${item.subTotal}`;
 
         const trashDiv = document.createElement('DIV');
         trashDiv.classList.add('cart__trash');
@@ -192,6 +192,7 @@ function limpiarHTML() {
 
 function alerta(mensaje, tipo) {
     const container = document.querySelector('.cart.container');
+    container.classList.add('d-block');
 
     const alerta = document.createElement('DIV');
     alerta.textContent = mensaje;
@@ -201,7 +202,7 @@ function alerta(mensaje, tipo) {
         alerta.classList.add('error');
     }
 
-    container.appendChild(alerta);
+    container.insertBefore(alerta, container.firstElementChild);
     
     setTimeout(() => {
         alerta.remove();

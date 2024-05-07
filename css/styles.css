@@ -560,10 +560,12 @@ footer {
         display: grid;
         grid-template-columns: 3fr 1fr;
         gap: 2rem;
+        min-height: 38rem;
     }
 }
 .cart__items {
     display: grid;
+    align-self: start;
     gap: 1rem;
 }
 .cart__item {
@@ -804,10 +806,26 @@ input[type="number"]::-webkit-outer-spin-button {
     background-color: rgb(217, 247, 217);
     border-radius: 1rem;
 }
+@media (min-width: 768px) {
+    .alert {
+        width: 150%;
+    }
+}
 .error {
     color: rgb(231, 41, 41);
     background-color: #f6caca;
 }
 .d-none {
     display: none;
+}
+.d-block {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 20rem;
+}
+@media (min-width: 768px) {
+    .d-block {
+        min-height: 38rem;
+    }
 }
