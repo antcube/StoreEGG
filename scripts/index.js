@@ -1,38 +1,17 @@
 import { products } from './data.js';
+import { showHeader } from './funciones.js';
 
 // Selectores
 const productContainer = document.querySelector("#products");
-const inputBuscar = document.querySelector('#search');
-const formulario = document.querySelector('.form');
 
 // Event Listeners
 document.addEventListener('DOMContentLoaded', () => {
-    limpiarHTML();
-
+    showHeader(true);
+    
     mostrarProductos(products);
+
+    busquedaInput();
 });
-
-formulario.addEventListener('submit', e => {
-    e.preventDefault();
-})
-
-inputBuscar.addEventListener('keyup', e => {
-    const textoBusqueda = e.target.value.toLowerCase().trim();
-    
-    const productoFiltrado = products.filter( producto => {
-        // return producto.name.toLowerCase() === textoBusqueda;
-        return producto.name.toLowerCase().startsWith(textoBusqueda);
-    });
-
-    limpiarHTML();
-
-    if(productoFiltrado.length) {
-        mostrarProductos(productoFiltrado);
-        return;
-    }
-    
-    mostrarProductos(products);
-})
 
 // Funciones
 function mostrarProductos(productoArray) {
@@ -80,6 +59,28 @@ function mostrarProductos(productoArray) {
         link.append(img);
         card.append(link, cardBody);
         productContainer.append(card);
+    });
+}
+
+function busquedaInput() {
+    const inputBuscar = document.querySelector('#search');
+
+    inputBuscar.addEventListener('keyup', e => {
+        const textoBusqueda = e.target.value.toLowerCase().trim();
+        
+        const productoFiltrado = products.filter( producto => {
+            // return producto.name.toLowerCase() === textoBusqueda;
+            return producto.name.toLowerCase().startsWith(textoBusqueda);
+        });
+    
+        limpiarHTML();
+    
+        if(productoFiltrado.length) {
+            mostrarProductos(productoFiltrado);
+            return;
+        }
+        
+        mostrarProductos(products);
     });
 }
 

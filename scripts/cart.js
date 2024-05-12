@@ -1,7 +1,11 @@
+import { showHeader } from "./funciones.js";
+
 const btnComprar = document.querySelector('#btn-comprar');
 const resumenContainer = document.querySelector('.cart__total');
 
 document.addEventListener('DOMContentLoaded', () => {
+    showHeader();
+
     const carrito = JSON.parse(localStorage.getItem('carritoEGG')) || [];
 
     showItemsinCart(carrito);

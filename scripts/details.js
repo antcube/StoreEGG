@@ -1,4 +1,5 @@
 import { products } from './data.js';
+import { showHeader } from './funciones.js';
 
 const query = location.search;
 const params = new URLSearchParams(query);
@@ -6,6 +7,8 @@ const id = params.get('id');
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    showHeader();
+
     const resultado = products.find( product => product.id === id);
 
     if (resultado) {
@@ -103,9 +106,23 @@ function mostrarProducto(producto) {
     const checkoutBlock = document.createElement('DIV');
     checkoutBlock.className = 'producto__checkout-block';
 
+    const totalContainer = document.createElement('DIV');
+    totalContainer.classList.add('producto__total-container');
+
     const total = document.createElement('P');
     total.className = 'producto__total';
     total.textContent = 'Total';
+
+    const heart = document.createElement('IMG');
+    heart.src = 'img/heart.svg';
+    heart.alt = 'favorito';
+    heart.classList.add('producto__heart');
+
+    heart.addEventListener('click', () => {
+        addFavorite(producto);
+    })
+
+    totalContainer.append(total, heart);
 
     const price = document.createElement('P');
     price.className = 'producto__price';
@@ -200,7 +217,7 @@ function mostrarProducto(producto) {
     formTop.append(selectNumber, button);
     formBottom.append(buttonAdd);
     formCarrito.append(formTop, formBottom);
-    checkoutBlock.append(total, price, taxation, info1, info2, formCarrito);
+    checkoutBlock.append(totalContainer, price, taxation, info1, info2, formCarrito);
     container.append(imagesBlock, descriptionBlock, checkoutBlock);
 }
 
@@ -244,4 +261,25 @@ function saveProduct(producto) {
     }
     
     localStorage.setItem('carritoEGG', JSON.stringify(carrito));
+}
+
+function addFavorite(producto) {
+    // const color = document.querySelector('#color').value;
+
+    const productoFavorito = {
+        ...producto,  // Spread Operator
+    }
+
+    // Local Storage
+    const favoritos = JSON.parse(localStorage.getItem('favoritoEGG')) ?? [];
+
+    const indexFavoritoExistente = favoritos.findIndex(item => item.id === productoFavorito.id);
+
+    if(indexFavoritoExistente >= 0) {
+        console.log('Si existe en Favoritos');
+    } else {
+        favoritos.push(productoFavorito);
+    }
+
+    localStorage.setItem('favoritoEGG', JSON.stringify(favoritos));
 }
