@@ -13,14 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (resultado) {
         mostrarProducto(resultado);
-
-        const heart = document.querySelector('.producto__total-container img');
-
-        if (isFavorite(resultado)) {
-            heart.src = 'img/heartRojo.svg';
-        } else {
-            heart.src = 'img/heart.svg';
-        }
+        updateHeart(resultado);
     } else {
         console.error('Producto no encontrado');
         window.location.href = 'index.html';
@@ -82,6 +75,10 @@ function mostrarProducto(producto) {
     select.className = 'selector__select';
     select.id = 'color';
 
+    select.addEventListener('change', () => {
+        updateHeart(producto);
+    });
+
     // const defaultOption = document.createElement('OPTION');
     // defaultOption.textContent = '-- Seleccionar --';
     // defaultOption.selected = true;
@@ -127,17 +124,14 @@ function mostrarProducto(producto) {
     heart.classList.add('producto__heart');
 
     heart.addEventListener('click', () => {
+        producto.colors = document.querySelector('#color').value;
         if (isFavorite(producto)) {
             heart.src = 'img/heart.svg';
             removeFavorite(producto);
         } else {
             heart.src = 'img/heartRojo.svg';
-            addFavorite(producto, true);
+            addFavorite(producto);
         }
-        // heart.src = 'img/heartRojo.svg';
-        // setTimeout(() => {
-        //     addFavorite(producto);
-        // }, 2000);
     })
 
     totalContainer.append(total, heart);
@@ -270,31 +264,20 @@ function saveProduct(producto) {
     localStorage.setItem('carritoEGG', JSON.stringify(carrito));
 }
 
-function addFavorite(producto, unidad = false) {
+function addFavorite(producto) {
     const favoritos = JSON.parse(localStorage.getItem('favoritoEGG')) ?? [];
+    
+    const productoFavorito = {
+        ...producto,  // Spread Operator
+        quantity: 1
+    }
 
-    if(unidad) {
-        const productoFavorito = {
-            ...producto,  // Spread Operator
-            quantity: 1
-        }
-        
-        favoritos.push(productoFavorito);
+    const indexFavoritoExistente = favoritos.findIndex(item => item.id === productoFavorito.id && item.colors === productoFavorito.colors);
+
+    if(indexFavoritoExistente >= 0) {
+        console.log('Si existe en Favoritos');
     } else {
-        // const color = document.querySelector('#color').value;
-
-        const productoFavorito = {
-            ...producto,  // Spread Operator
-        }
-
-        // Local Storage
-        const indexFavoritoExistente = favoritos.findIndex(item => item.id === productoFavorito.id);
-
-        if(indexFavoritoExistente >= 0) {
-            console.log('Si existe en Favoritos');
-        } else {
-            favoritos.push(productoFavorito);
-        }
+        favoritos.push(productoFavorito);
     }
 
     localStorage.setItem('favoritoEGG', JSON.stringify(favoritos));
@@ -302,11 +285,23 @@ function addFavorite(producto, unidad = false) {
 
 function isFavorite(producto) {
     const favoritos = JSON.parse(localStorage.getItem('favoritoEGG')) || [];
-    return favoritos.some(fav => fav.id === producto.id);
+    return favoritos.some(fav => fav.id === producto.id && fav.colors === producto.colors);
 }
 
 function removeFavorite(producto) {
     const favoritos = JSON.parse(localStorage.getItem('favoritoEGG')) || [];
-    const favoritosUpdate = favoritos.filter(fav => fav.id !== producto.id);
+    const favoritosUpdate = favoritos.filter(fav => fav.id !== producto.id || fav.colors !== producto.colors);
     localStorage.setItem('favoritoEGG', JSON.stringify(favoritosUpdate));
+}
+
+function updateHeart(producto) {
+    const heart = document.querySelector('.producto__total-container img');
+    const color = document.querySelector('#color').value;
+    producto.colors = color;
+
+    if (isFavorite(producto)) {
+        heart.src = 'img/heartRojo.svg';
+    } else {
+        heart.src = 'img/heart.svg';
+    }
 }

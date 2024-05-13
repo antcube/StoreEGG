@@ -51,7 +51,7 @@ function mostrarFavoritos(favoritos) {
 
         const color = document.createElement('P');
         color.classList.add('favorito__color');
-        color.textContent = favorito.colors[0];
+        color.textContent = favorito.colors;
 
         colorContainer.append(colorLabel, color);
 
@@ -64,7 +64,7 @@ function mostrarFavoritos(favoritos) {
         colorLabel2.textContent = 'Color:';
         const color2 = document.createElement('P');
         color2.classList.add('favorito__color');
-        color2.textContent = favorito.colors[0];
+        color2.textContent = favorito.colors;
 
         const priceDiv = document.createElement('DIV');
         const priceLabel = document.createElement('P');
