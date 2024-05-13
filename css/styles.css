@@ -537,6 +537,11 @@ footer {
     height: 40px;
     border-radius: 10px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.btn-outline:hover {
+    background-color: #ff3b3c;
+    color: white;
 }
 
 /* Ofertas */
@@ -742,6 +747,10 @@ input[type="number"]::-webkit-outer-spin-button {
     cursor: pointer;
     width: 2rem;
     height: 2rem;
+    transition: transform 0.3s;
+}
+.cart__trash img:hover {
+    transform: scale(1.2);
 }
 .cart__total {
     display: flex;

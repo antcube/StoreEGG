@@ -13,6 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (resultado) {
         mostrarProducto(resultado);
+
+        const heart = document.querySelector('.producto__total-container img');
+
+        if (isFavorite(resultado)) {
+            heart.src = 'img/heartRojo.svg';
+        } else {
+            heart.src = 'img/heart.svg';
+        }
     } else {
         console.error('Producto no encontrado');
         window.location.href = 'index.html';
@@ -119,7 +127,17 @@ function mostrarProducto(producto) {
     heart.classList.add('producto__heart');
 
     heart.addEventListener('click', () => {
-        addFavorite(producto);
+        if (isFavorite(producto)) {
+            heart.src = 'img/heart.svg';
+            removeFavorite(producto);
+        } else {
+            heart.src = 'img/heartRojo.svg';
+            addFavorite(producto, true);
+        }
+        // heart.src = 'img/heartRojo.svg';
+        // setTimeout(() => {
+        //     addFavorite(producto);
+        // }, 2000);
     })
 
     totalContainer.append(total, heart);
@@ -159,19 +177,8 @@ function mostrarProducto(producto) {
     const formTop = document.createElement('DIV');
     formTop.classList.add('form__top');
 
-    const formBottom = document.createElement('DIV');
-    formBottom.classList.add('form__bottom');
-
-    // const inputNumber = document.createElement('INPUT');
-    // inputNumber.type = 'number';
-    // inputNumber.min = 1;
-    // // inputNumber.max = producto.stock;
-    // inputNumber.max = 5;
-    // inputNumber.value = 1;
-
-    // inputNumber.addEventListener('change', (e) => {
-    //     actualizarPrecio(producto, parseInt(e.target.value));
-    // });
+    // const formBottom = document.createElement('DIV');
+    // formBottom.classList.add('form__bottom');
 
     const selectNumber = document.createElement('SELECT');
     
@@ -198,9 +205,9 @@ function mostrarProducto(producto) {
         actualizarPrecio(producto, cantidad);
     });
 
-    const button = document.createElement('BUTTON');
-    button.classList.add('btn-primary');
-    button.textContent = 'Comprar';
+    // const button = document.createElement('BUTTON');
+    // button.classList.add('btn-primary');
+    // button.textContent = 'Comprar';
 
     const buttonAdd = document.createElement('BUTTON');
     buttonAdd.classList.add('btn-outline');
@@ -214,9 +221,9 @@ function mostrarProducto(producto) {
 
     info1.append(icono1, textoEnvio);
     info2.append(icono2, textoDias);
-    formTop.append(selectNumber, button);
-    formBottom.append(buttonAdd);
-    formCarrito.append(formTop, formBottom);
+    formTop.append(selectNumber, buttonAdd);
+    // formBottom.append(buttonAdd);
+    formCarrito.append(formTop);
     checkoutBlock.append(totalContainer, price, taxation, info1, info2, formCarrito);
     container.append(imagesBlock, descriptionBlock, checkoutBlock);
 }
@@ -263,23 +270,43 @@ function saveProduct(producto) {
     localStorage.setItem('carritoEGG', JSON.stringify(carrito));
 }
 
-function addFavorite(producto) {
-    // const color = document.querySelector('#color').value;
-
-    const productoFavorito = {
-        ...producto,  // Spread Operator
-    }
-
-    // Local Storage
+function addFavorite(producto, unidad = false) {
     const favoritos = JSON.parse(localStorage.getItem('favoritoEGG')) ?? [];
 
-    const indexFavoritoExistente = favoritos.findIndex(item => item.id === productoFavorito.id);
-
-    if(indexFavoritoExistente >= 0) {
-        console.log('Si existe en Favoritos');
-    } else {
+    if(unidad) {
+        const productoFavorito = {
+            ...producto,  // Spread Operator
+            quantity: 1
+        }
+        
         favoritos.push(productoFavorito);
+    } else {
+        // const color = document.querySelector('#color').value;
+
+        const productoFavorito = {
+            ...producto,  // Spread Operator
+        }
+
+        // Local Storage
+        const indexFavoritoExistente = favoritos.findIndex(item => item.id === productoFavorito.id);
+
+        if(indexFavoritoExistente >= 0) {
+            console.log('Si existe en Favoritos');
+        } else {
+            favoritos.push(productoFavorito);
+        }
     }
 
     localStorage.setItem('favoritoEGG', JSON.stringify(favoritos));
+}
+
+function isFavorite(producto) {
+    const favoritos = JSON.parse(localStorage.getItem('favoritoEGG')) || [];
+    return favoritos.some(fav => fav.id === producto.id);
+}
+
+function removeFavorite(producto) {
+    const favoritos = JSON.parse(localStorage.getItem('favoritoEGG')) || [];
+    const favoritosUpdate = favoritos.filter(fav => fav.id !== producto.id);
+    localStorage.setItem('favoritoEGG', JSON.stringify(favoritosUpdate));
 }
