@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Funciones
 function mostrarProductos(productoArray) {
+    productoArray.sort((a, b) => a.name.localeCompare(b.name));
+
     productoArray.forEach( product => {
         const card = document.createElement("DIV");
         card.classList.add("product-card");
