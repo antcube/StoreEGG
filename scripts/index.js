@@ -8,12 +8,36 @@ const productContainer = document.querySelector("#products");
 document.addEventListener('DOMContentLoaded', () => {
     showHeader(true);
     
-    mostrarProductos(products);
+    obtenerProductos();
+
+    // mostrarProductos(products);
 
     busquedaInput();
 });
 
 // Funciones
+async function obtenerProductos() {
+    const url = './products.json';
+
+    // Con async await
+    try {
+        const response = await fetch(url);
+        if(!response.ok) throw new Error('Error en la petición');
+        const data = await response.json();
+        mostrarProductos(data.productos);
+    } catch (error) {
+        console.error(error);
+    }
+    
+    // Con fetch
+    // fetch(url)
+    //     .then(response => {
+    //         if(!response.ok) throw new Error('Error en la petición');
+    //         return response.json()
+    //     })
+    //     .then(data => mostrarProductos(data.productos));
+}
+
 function mostrarProductos(productoArray) {
     productoArray.sort((a, b) => a.name.localeCompare(b.name));
 

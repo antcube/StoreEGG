@@ -1,0 +1,84 @@
+{
+    "productos": [
+        {
+            "id": "P7Q8R11",
+            "name": "MacBook Apple Air 13.6\" M2",
+            "description": "Descubre la potencia imparable y la elegancia inigualable: MacBook Air M2, experimenta la sinergia perfecta entre potencia, rendimiento y estilo con el MacBook Air. Eleva tu productividad y creatividad a nuevas alturas mientras descubres un mundo de posibilidades ilimitadas junto a Apple MacBook Air.",
+            "price": 6999.00,
+            "discount": 10,
+            "img": ["./img/p1_1.webp", "./img/p1_2.webp", "./img/p1_3.webp", "./img/p1_4.webp"],
+            "colors": ["Silver", "Gold", "Silver Dark"],
+            "linkTo": "./details.html"
+        },
+        {
+            "id": "P7Q8R12",
+            "name": "Macbook Apple Air 13\" M1",
+            "description": "El Apple MacBook Air 13\" con Chip M1 8GB es un portátil con una pantalla Retina, un potente procesador M1 y un teclado de última generación. El chip M1 integra CPU, GPU, Neural Engine, E/S y más en un solo sistema en un chip (SoC).",
+            "price": 4599.00,
+            "discount": 10,
+            "img": ["./img/p2_1.webp", "./img/p2_2.webp", "./img/p2_3.webp", "./img/p2_4.webp"],
+            "colors": ["Silver", "Gold", "Silver Dark"],
+            "linkTo": "./details.html"
+        },
+        {
+            "id": "P7Q8R13",
+            "name": "Laptop Lenovo IP5Pro 16ARH7 R7",
+            "description": "El portátil IdeaPad 5 Pro de 7.ª generación [40,64 cm (16″), AMD] está equipado con procesadores móviles AMD Ryzen™ 6000 Series. La tarjeta gráfica NVIDIA",
+            "price": 2699.00,
+            "discount": 8,
+            "img": ["./img/p3_1.webp", "./img/p3_2.webp", "./img/p3_3.webp", "./img/p3_4.webp"],
+            "colors": ["Gris"],
+            "linkTo": "./details.html"
+        },
+        {
+            "id": "P7Q8R14",
+            "name": "Laptop LG Gram 16Z90Q-G",
+            "description": "Laptop LG gram ultraligera, panel IPS de 16” 16:10 y procesador Intel® Evo™ Core™ i5 de 12 Generación. Pantalla IPS de 16\" 16:10 WQXGA (2560 x 1600) Windows 11 Home con plataforma Intel con certificación militar.",
+            "price": 1000.00,
+            "discount": 5,
+            "img": ["./img/p4_1.webp", "./img/p4_2.webp", "./img/p4_3.webp", "./img/p4_4.webp"],
+            "colors": ["Gris"],
+            "linkTo": "./details.html"
+        },
+        {
+            "id": "P7Q8R15",
+            "name": "iPhone 11 6.1\" 128GB",
+            "description": "Enfoque automático continuo, y sensores: Face ID / Barómetro / Giroscopio de tres ejes / Acelerómetro / Sensor de proximidad / Sensor de luz ambiental. Núcleos del procesador: CPU de 6 núcleos (2 de rendimiento y 4 de eficiencia) / GPU de 4 núcleos / Neural Engine de 8 núcleos",
+            "price": 2199.00,
+            "discount": 5,
+            "img": ["./img/p5_1.webp", "./img/p5_2.webp", "./img/p5_3.webp", "./img/p5_4.webp"],
+            "colors": ["Black", "Green", "Yellow", "Purple", "White"],
+            "linkTo": "./details.html"
+        },
+        {
+            "id": "P7Q8R16",
+            "name": "Producto6",
+            "description": "Descripción del producto 6",
+            "price": 1300.00,
+            "discount": 50,
+            "img": ["./img/mock2.jpg", "./img/mock2.jpg", "./img/mock2.jpg"],
+            "colors": ["color1"],
+            "linkTo": "./details.html"
+        },
+        {
+            "id": "P7Q8R17",
+            "name": "Producto7",
+            "description": "Descripción del producto 7",
+            "price": 1300.00,
+            "discount": 50,
+            "img": ["./img/mock2.jpg", "./img/mock2.jpg", "./img/mock2.jpg"],
+            "colors": ["color1"],
+            "linkTo": "./details.html"
+        },
+        {
+            "id": "P7Q8R18",
+            "name": "Producto8",
+            "description": "Descripción del producto 8",
+            "price": 1300.00,
+            "discount": 50,
+            "img": ["./img/mock2.jpg", "./img/mock2.jpg", "./img/mock2.jpg"],
+            "colors": ["color1"],
+            "linkTo": "./details.html"
+        }
+    ]
+}
