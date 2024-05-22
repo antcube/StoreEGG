@@ -573,6 +573,12 @@ footer {
 /* Carrito Finalizar */
 .cart {
     padding: 5rem 0;
+    min-height: 20rem;
+}
+@media (min-width: 768px) {
+    .cart {
+        min-height: 30rem;
+    }
 }
 @media (min-width: 992px) {
     .cart {
@@ -1035,4 +1041,35 @@ p.favorito__text{
 }
 .favorito__trash img:hover {
     transform: scale(1.2);
+}
+
+
+/* SweetAlert */
+.popupSweetAlert {
+    border-radius: 2rem;
+    transition: all 0.3s ease;
+}
+@media (min-width: 768px) {
+    .popupSweetAlert {
+        padding: 0 2rem 2rem;
+    }
+}
+.popupSweetAlert:hover {
+    transform: scale(1.1);
+    box-shadow: 0 2rem 2rem rgba(0, 0, 0, 0.1);
+}
+.textSweetAlert {
+    font-size: 1.5rem;
+    margin: 0;
+}
+.btnConfirmSweetAlert,
+.btnCancelSweetAlert {
+    font-size: 1.3rem !important;
+    font-weight: bold;
+    padding: 1rem 2rem;
+    transition: all 0.3s ease;
+}
+.btnConfirmSweetAlert:hover,
+.btnCancelSweetAlert:hover {
+    transform: scale(1.05);
 }
