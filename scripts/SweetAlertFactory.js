@@ -28,6 +28,12 @@ class SweetAlert {
                     icon: "warning",
                 };
                 break;
+            case "info":
+                options = {
+                    ...options,
+                    icon: "info",
+                };
+                break;    
             case "success":
                 options = {
                     ...options,

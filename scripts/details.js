@@ -1,9 +1,11 @@
 import { products } from './data.js';
 import { showHeader } from './funciones.js';
+import SweetAlertFactory from './SweetAlertFactory.js';
 
 const query = location.search;
 const params = new URLSearchParams(query);
 const id = params.get('id');
+const sweetAlertFactory = new SweetAlertFactory();
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -210,7 +212,7 @@ function mostrarProducto(producto) {
     buttonAdd.addEventListener('click', () => {
         saveProduct(producto);
 
-        window.location.href = 'cart.html';
+        // window.location.href = 'cart.html';
     });
 
     info1.append(icono1, textoEnvio);
@@ -253,15 +255,31 @@ function saveProduct(producto) {
 
     const indexProductoExistente = carrito.findIndex(prod => prod.id === productoAgregado.id && prod.color === productoAgregado.color);
 
-    if(indexProductoExistente >= 0) {
+    if(indexProductoExistente >= 0) { // El producto si existe
         carrito[indexProductoExistente].quantity += productoAgregado.quantity;
         carrito[indexProductoExistente].subTotal = carrito[indexProductoExistente].quantity * price;
-    } else {
-        // carrito = [...carrito, productoAgregado]; // Cambiar a let carrito si se usa esta línea
-        carrito.push(productoAgregado);
+
+        const infoAlert = sweetAlertFactory.createAlert('info', 'El producto ya está en el carrito', 'Se ha actualizado la cantidad');
+
+        infoAlert.showAlert()
+            .then( result => {
+                if(result.isConfirmed || result.dismiss === Swal.DismissReason.timer) {
+                    localStorage.setItem('carritoEGG', JSON.stringify(carrito));
+                    window.location.href = 'cart.html';
+                }
+            });
+    } else { // El producto no existe
+        const successAlert = sweetAlertFactory.createAlert('success', 'El producto ha sido agregado al carrito', 'Puedes verlo en el carrito');
+        successAlert.showAlert()
+            .then( result => {
+                console.log(result);
+                if(result.isConfirmed || result.dismiss === Swal.DismissReason.timer) {
+                    const carritoUpdate = [...carrito, productoAgregado];
+                    localStorage.setItem('carritoEGG', JSON.stringify(carritoUpdate));
+                    window.location.href = 'cart.html';
+                }
+            });
     }
-    
-    localStorage.setItem('carritoEGG', JSON.stringify(carrito));
 }
 
 function addFavorite(producto) {
