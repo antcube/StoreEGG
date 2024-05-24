@@ -1,4 +1,3 @@
-import { products } from './data.js';
 import { showHeader } from './funciones.js';
 
 // Selectores

@@ -1,4 +1,7 @@
 import { showHeader } from './funciones.js';
+import SweetAlertFactory from './SweetAlertFactory.js';
+
+const sweetAlertFactory = new SweetAlertFactory();
 
 document.addEventListener('DOMContentLoaded', () => {
     const resultado = JSON.parse(localStorage.getItem('favoritoEGG')) ?? [];
@@ -12,8 +15,21 @@ function mostrarFavoritos(favoritos) {
     console.log(favoritos);
     const favoritesContainer = document.querySelector('.favorito__items');
 
-    favoritos.forEach(favorito => {
+    limpiarHTML();
 
+    if (favoritos.length === 0) {
+        const warningAlert = sweetAlertFactory.createAlert('warning', 'Favoritos vacío', 'No hay productos favoritos.');
+
+        warningAlert.showAlert()
+            .then( result => {
+                if(result.isConfirmed || result.dismiss === Swal.DismissReason.timer) {
+                    window.location.href = 'index.html';
+                    return;
+                }
+            })
+    }
+
+    favoritos.forEach(favorito => {
         // Crear el contenedor para cada item
         const favoritoItem = document.createElement('DIV');
         favoritoItem.classList.add('favorito__item');
@@ -87,6 +103,10 @@ function mostrarFavoritos(favoritos) {
 
         btnContainer.append(btn);
 
+        btn.addEventListener('click', () => {
+            saveProduct(favorito);
+        })
+
         // Boto de eliminar
         const trash = document.createElement('DIV');
         trash.classList.add('favorito__trash');
@@ -97,8 +117,84 @@ function mostrarFavoritos(favoritos) {
 
         trash.append(trashImg);
 
+        trashImg.addEventListener('click', () => {
+            removeItemFromFavorites(favorito.id, favorito.colors);
+        });
+
         // Anidar elementos
         favoritoItem.append(imgContainer, description, colorContainer, priceUnitary, btnContainer, trash);
         favoritesContainer.appendChild(favoritoItem);
     });
+}
+
+function removeItemFromFavorites(id, color) {
+    const questionAlert = sweetAlertFactory.createAlert('question', '¿Estás seguro de eliminar este producto de tus favoritos?',  'Una vez eliminado no podrás recuperarlo');
+    
+    questionAlert.showAlert()
+        .then(result => {
+            if(result.isConfirmed || result.dismiss === Swal.DismissReason.timer) {
+                const favoritos = JSON.parse(localStorage.getItem('favoritoEGG'));
+
+                const newFavoritos = favoritos.filter(favorito => favorito.id !== id || favorito.colors !== color);
+
+                localStorage.setItem('favoritoEGG', JSON.stringify(newFavoritos));
+
+                mostrarFavoritos(newFavoritos);
+            }
+        });
+}
+
+function limpiarHTML() {
+    const favoritesContainer = document.querySelector('.favorito__items');
+
+    while(favoritesContainer.firstChild) {
+        favoritesContainer.removeChild(favoritesContainer.firstChild);
+    }
+}
+
+function saveProduct(producto) {
+    const { id, name, description, price, img, quantity, colors } = producto;
+
+    const subTotal = price * quantity;
+
+    const productoAgregado = {
+        id,
+        name, 
+        description,
+        price,
+        subTotal,
+        img,
+        quantity,
+        color: colors
+    }
+
+    const carrito = JSON.parse(localStorage.getItem('carritoEGG')) ?? [];
+
+    const indexProductoExistente = carrito.findIndex(prod => prod.id === productoAgregado.id && prod.color === productoAgregado.color);
+
+    if(indexProductoExistente >= 0) {
+        carrito[indexProductoExistente].quantity += productoAgregado.quantity;
+        carrito[indexProductoExistente].subTotal = carrito[indexProductoExistente].quantity * price;
+
+        const infoAlert = sweetAlertFactory.createAlert('info', 'El producto ya está en el carrito', 'Se ha actualizado la cantidad');
+
+        infoAlert.showAlert()
+            .then( result => {
+                if(result.isConfirmed || result.dismiss === Swal.DismissReason.timer) {
+                    localStorage.setItem('carritoEGG', JSON.stringify(carrito));
+                    window.location.href = 'cart.html';
+                }
+            });
+    } else {
+        const successAlert = sweetAlertFactory.createAlert('success', 'El producto ha sido agregado al carrito', 'Puedes verlo en el carrito');
+        successAlert.showAlert()
+            .then( result => {
+                console.log(result);
+                if(result.isConfirmed || result.dismiss === Swal.DismissReason.timer) {
+                    const carritoUpdate = [...carrito, productoAgregado];
+                    localStorage.setItem('carritoEGG', JSON.stringify(carritoUpdate));
+                    window.location.href = 'cart.html';
+                }
+            });
+    }
 }
