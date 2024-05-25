@@ -63,27 +63,19 @@ export function showHeader(showForm = false) {
 
         if(icon.id) {
             iconLink.addEventListener('click', () => {
-                // const isOnline = localStorage.getItem('loginEGG') === 'true';
-                // console.log(isOnline);
+                // const isOnline = JSON.parse(localStorage.getItem('loginEGG')) ?? false;
+
                 // if(isOnline) {
-                //     localStorage.setItem('loginEGG', 'false');
+                //     localStorage.setItem('loginEGG', JSON.stringify(false));
                 //     iconImg.src = 'img/login.svg';
+                //     hideIcons();
                 // } else {
-                //     localStorage.setItem('loginEGG', 'true');
+                //     localStorage.setItem('loginEGG', JSON.stringify(true));
                 //     iconImg.src = 'img/loginCheck.svg';
+                //     showIcons();
                 // }
 
-                const isOnline = JSON.parse(localStorage.getItem('loginEGG')) ?? false;
-
-                if(isOnline) {
-                    localStorage.setItem('loginEGG', JSON.stringify(false));
-                    iconImg.src = 'img/login.svg';
-                    hideIcons();
-                } else {
-                    localStorage.setItem('loginEGG', JSON.stringify(true));
-                    iconImg.src = 'img/loginCheck.svg';
-                    showIcons();
-                }
+                window.location.href = 'login.html';
             })
         }
     });

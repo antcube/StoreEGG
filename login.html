@@ -1,154 +1,96 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Iniciar Sesión - TiendaMia</title>
-<link rel="stylesheet" href="styles.css" />
-<style>
-body {
-font-family: Arial, sans-serif;
-background-color: #f9f9f9;
-display: flex;
-justify-content: center;
-
-align-items: center;
-height: 100vh;
-margin: 0;
-}
-.login-container {
-background-color: white;
-padding: 20px;
-border-radius: 5px;
-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-width: 400px;
-text-align: center;
-}
-.login-container h1 {
-margin-bottom: 20px;
-}
-.login-container input[type="email"],
-.login-container input[type="password"] {
-width: 95%;
-padding: 10px;
-margin: 10px 0;
-border: 1px solid #ccc;
-border-radius: 5px;
-font-size: 14px;
-}
-.login-container input[type="submit"] {
-width: 100%;
-padding: 15px;
-background-color: #f44336;
-color: white;
-border: none;
-border-radius: 5px;
-cursor: pointer;
-font-size: 16px;
-}
-.login-container input[type="submit"]:hover {
-background-color: #d32f2f;
-}
-
-.login-container a {
-color: #007bff;
-text-decoration: none;
-font-size: 14px;
-}
-.login-container a:hover {
-text-decoration: underline;
-}
-.register-link {
-margin-top: 20px;
-}
-.divider {
-display: flex;
-align-items: center;
-text-align: center;
-}
-.divider::before,
-.divider::after {
-content: "";
-flex: 1;
-border-bottom: 1px solid #ccc;
-}
-.divider::before {
-margin-right: 0.25em;
-}
-.divider::after {
-margin-left: 0.25em;
-}
-.login-container p {
-font-size: 12px;
-color: #777;
-}
-.login-container p a {
-
-color: #007bff;
-text-decoration: none;
-}
-.login-container p a:hover {
-text-decoration: underline;
-}
-</style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Iniciar Sesión - Tienda Virtual</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-<div class="login-container">
-<h1>Ingresar</h1>
-<form
-id="loginForm"
-action="dashboard.html"
-method="post"
-onsubmit="return validateForm()"
->
-<input
-type="email"
-id="email"
-name="email"
-placeholder="Tu dirección de E-mail"
-required
-/>
-<input
-type="password"
-id="password"
-name="password"
-placeholder="Contraseña"
-required
-/>
-<a href="#">¿Olvidaste tu contraseña?</a>
-<input type="submit" value="Ingresar" />
-</form>
-<p>
-* Al ingresar con Facebook o Google estás aceptando recibir ofertas
-por
-email
-</p>
-<p>
-Tiendamia está protegida por reCAPTCHA y se aplican la
+    <header class="header">
+        <div class="container login-header">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="img/tiendamia-logo.svg" alt="Logo store">
+                </a>
+            </div>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="login">
+            <h2 class="login__title">Ingresar</h2>
+            <form class="login__form" id="loginForm" autocomplete="off">
+                <input id="correo" class="login__input" type="email" placeholder="Tu dirección de E-mail" autocomplete="username">
+                <input id="password" class="login__input" type="password" placeholder="Contraseña" autocomplete="current-password">
+                <a class="login__text" href="#">¿Olvidaste tu contraseña?</a>
+                <button class="login__button">Ingresar</button>
+            </form>
+            <div class="login__separator">
+                <div class="login__separator-line"></div>
+                <div class="login__separator-text">¿No tienes una cuenta?</div>
+                <div class="login__separator-line"></div>
+            </div>
+            <div class="login__register">
+                <button class="login__register-button">Regístrate</button>
+            </div>
+            <div class="login__security-info">
+                <h3 class="login__security-info__title">Guardamos tu correo electrónico de manera 100% segura para:</h3>
+                <ul class="login__security-info__list">
+                    <li class="login__security-info__item">Identificar tu perfil</li>
+                    <li class="login__security-info__item">Notificar sobre los estados de tu compra</li>
+                    <li class="login__security-info__item">Guardar el historial de compras</li>
+                    <li class="login__security-info__item">Facilitar el proceso de compra</li>
+                </ul>
+            </div>
+            <p class="login__terminos">
+                Al registrarte estás aceptando nuestros
+                <a href="#">Términos y Condiciones</a> y nuestras
+                <a href="#">Políticas de Privacidad</a>.
+            </p>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container footer__contenido">
+            <div id="footer" class="columns-container">
+                <div class="col">
+                    <a href="#">Ofertas</a>
+                    <a href="#">Laptops</a>
+                    <a href="#">Audio</a>
+                    <a href="#">Auriculares</a>
+                </div>
+                <div class="col">
+                    <a href="#">Cómo comprar</a>
+                    <a href="#">Formas de pago</a>
+                    <a href="#">Envios</a>
+                    <a href="#">Devoluciones</a>
+                </div>
+                <div class="col">
+                    <a href="#">Costos y tarifas</a>
+                    <a href="#">Impuestos</a>
+                    <a href="#">Facturación</a>
+                </div>
+                <div class="col">
+                    <a href="#">Mis pedidos</a>
+                    <a href="#">Pedir nuevamente</a>
+                    <a href="#">Lista de deseos</a>
+                </div>
+                <div class="col">
+                    <a href="#">Garantía</a>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>Curso de HTML + CSS 2024</p>
+            </div>
+        </div>
+    </footer>
 
-<a href="#">Política de Privacidad</a> y los
-<a href="#">Términos de Servicio de Google</a>.
-</p>
-<div class="divider">¿No tienes una cuenta?</div>
-<div class="register-link">
-<a href="register.html">Regístrate</a>
-</div>
-<p>
-Al registrarte estás aceptando nuestros
-<a href="#">Términos y Condiciones</a> y nuestras
-<a href="#">Políticas de Privacidad</a>.
-</p>
-</div>
-<script>
-function validateForm() {
-const email = document.getElementById("email").value;
-const password = document.getElementById("password").value;
-if (!email || !password) {
-alert("Por favor, complete todos los campos.");
-return false;
-}
-return true;
-}
-</script>
+    <script src="./scripts/login.js" type="module"></script>
 </body>
 </html>
